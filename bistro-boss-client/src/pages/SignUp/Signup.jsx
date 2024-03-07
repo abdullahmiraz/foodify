@@ -17,7 +17,7 @@ const Signup = () => {
   return (
     <>
       <Helmet>
-        <title>Bistro Boss | Sign Up</title>
+        <title>Foodify | Sign Up</title>
       </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content min-w-8 flex flex-col  ">

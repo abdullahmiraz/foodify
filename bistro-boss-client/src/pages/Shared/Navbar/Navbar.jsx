@@ -1,14 +1,21 @@
-import React from "react";
-import { FaBars, FaCartPlus } from "react-icons/fa";
+import React, { useContext } from "react";
+import { FaBars, FaCartPlus, FaShoppingCart } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAdmin from "../../../hooks/useAdmin";
 import useCart from "../../../hooks/useCart";
+import { AuthContext } from "../../../providers/AuthProvider/AuthProvider";
 
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const { user, logOut } = useContext(AuthContext);
   const [isAdmin] = useAdmin();
   const [cart] = useCart();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
 
   const navOptions = (
     <>
@@ -19,19 +26,40 @@ const Navbar = () => {
         <NavLink to="/menu">Menu</NavLink>
       </li>
       <li>
-        <NavLink to="/order">Order</NavLink>
+        <NavLink to="/order/salad">Order</NavLink>
       </li>
-      <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
+      {user && isAdmin && (
+        <li>
+          <Link to="/dashboard/adminHome">Dashboard</Link>
+        </li>
+      )}
+      {user && !isAdmin && (
+        <li>
+          <Link to="/dashboard/userHome">Dashboard</Link>
+        </li>
+      )}
       <li>
         <NavLink to="/dashboard/cart" className="bg-pink-100">
-          Cart <FaCartPlus />
+          Cart <FaCartPlus />({cart.length})
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/login">Login</NavLink>
-      </li>
+      {user ? (
+        <>
+          {/* <span>{user?.displayName}</span> */}
+          <button
+            onClick={handleLogOut}
+            className=" mx-2 px-2 rounded-md bg-gray-500 btn-ghost text-white"
+          >
+            LogOut
+          </button>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -58,7 +86,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
-          <Link to={"/order"} className="btn  btn-outline">
+          <Link to={"/order/salad"} className="btn  btn-outline">
             Order
           </Link>
         </div>
