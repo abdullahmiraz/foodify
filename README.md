@@ -39,3 +39,36 @@ Additionally, for the backend server and database integration, the project utili
 - Form Data: A library for creating and managing form data in Node.js applications.
 - JSON Web Token (JWT): A compact, URL-safe means of representing claims securely between two parties, commonly used for authentication and authorization.
 - Mailgun-js and Mailgun.js: Libraries for sending emails and managing email-related tasks using the Mailgun API.
+
+### Some Images
+* Home Page
+[![Foodify Home Page](https://i.ibb.co/C9rFWhC/1-Foodify-Home-Page.png)](https://i.ibb.co/C9rFWhC/1-Foodify-Home-Page.png)
+
+* Payment History Option Pending
+[![Payment History Option Pending](https://i.ibb.co/n0t33dy/2-payment-history-option-pending.png)](https://i.ibb.co/n0t33dy/2-payment-history-option-pending.png)  
+
+
+* Payment System Stripe
+[![Payment System Stripe](https://i.ibb.co/Czjt5br/3-Payment-System-stripe.png)](https://i.ibb.co/Czjt5br/3-Payment-System-stripe.png)
+
+* All Users Table
+[![All Users Table](https://i.ibb.co/Tq80hRy/4-All-Users-Table.png)](https://i.ibb.co/Tq80hRy/4-All-Users-Table.png)
+
+* Manage Items
+[![Manage Items](https://i.ibb.co/gDTrFns/5-Manage-Items.png)](https://i.ibb.co/gDTrFns/5-Manage-Items.png)
+
+* Add New Items Admin Dashboard
+[![Add New Items Admin Dashboard](https://i.ibb.co/NWrGD6M/6-Add-New-Items-Admin-Dashboard.png)](https://i.ibb.co/NWrGD6M/6-Add-New-Items-Admin-Dashboard.png)  
+
+* Admin Page Home
+[![Admin Page Home](https://i.ibb.co/fXmJcq6/7-Admin-Page-home.png)](https://i.ibb.co/fXmJcq6/7-Admin-Page-home.png)
+
+* Server Running Images
+[![Server Running Images](https://i.ibb.co/WxnHNVN/7-server-running-images.png)](https://i.ibb.co/WxnHNVN/7-server-running-images.png)
+
+* Client Image
+[![Client Image](https://i.ibb.co/c81290W/8-client-image.png)](https://i.ibb.co/c81290W/8-client-image.png)
+
+ 
+
+
