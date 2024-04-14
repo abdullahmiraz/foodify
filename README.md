@@ -1,5 +1,8 @@
 # Foodify: Online Restaurant Ordering System
-
+## Links
+- **Client Link**: [Foodify Web App](https://foodify-bd.firebaseapp.com/)
+- **Server Link**: [Foodify Backend Server](https://foodify-bd.vercel.app/)
+  
 ## Introduction
 Foodify is a sophisticated online platform meticulously crafted to enhance the process of ordering food from restaurants. It offers users a seamless experience by presenting an intuitive interface for browsing available products and placing orders effortlessly. This documentation serves as a comprehensive guide to the project, elucidating its features, employed technologies, and providing visual insights into its functionality.
 
@@ -10,9 +13,7 @@ Foodify is a sophisticated online platform meticulously crafted to enhance the p
 - **Live and Fast Response**: Ensures real-time responsiveness, enriching the user experience with swift interactions.
 - **User Preference Saving**: Offers personalized ordering experiences by preserving user preferences and order history.
 
-## Links
-- **Client Link**: [Foodify Web App](https://foodify-bd.firebaseapp.com/)
-- **Server Link**: [Foodify Backend Server](https://foodify-bd.vercel.app/)
+
 
 ## Technology Stack
 
