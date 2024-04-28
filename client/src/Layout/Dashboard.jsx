@@ -96,12 +96,12 @@ const Dashboard = () => {
                   My Cart ({cart.length})
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/dashboard/review">
                   <FaAd></FaAd>
                   Add a Review
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink to="/dashboard/paymentHistory">
                   <FaList></FaList>
