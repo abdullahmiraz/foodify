@@ -9,7 +9,7 @@ const FoodCard = ({ item }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const axiosSecure = useAxiosSecure();
+  const [axiosSecure] = useAxiosSecure();
   const [, refetch] = useCart();
 
   const handleAddToCart = () => {
@@ -55,8 +55,8 @@ const FoodCard = ({ item }) => {
   };
   return (
     <div className="card  bg-base-100 shadow-xl">
-      <figure>
-        <img src={image} alt="Shoes" />
+      <figure  className="min-h-min">
+        <img className="object-cover w-full h-[200px] " src={image} alt="Shoes" />
       </figure>
       <p className="absolute right-0 mr-4 mt-4 px-4 bg-slate-900 text-white">
         ${price}

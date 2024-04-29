@@ -19,7 +19,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const AdminHome = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  const [axiosSecure] = useAxiosSecure();
 
   const { data: stats = {} } = useQuery({
     queryKey: ["admin-stats"],
@@ -97,7 +97,7 @@ const AdminHome = () => {
           <div className="stat-figure text-secondary">
             <FaDollarSign className="text-3xl"></FaDollarSign>
           </div>
-          <div className="stat-title">Revenue</div>
+          <div className="stat-title">Revenue</div> 
           <div className="stat-value">${stats.revenue}</div>
           <div className="stat-desc">Jan 1st - Feb 1st</div>
         </div>

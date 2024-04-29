@@ -18,6 +18,12 @@ import AddItems from "../pages/Dashboard/AddItems/AddItems";
 import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
 import UpdateItem from "../pages/Dashboard/UpdateItem/UpdateItem";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import Bookings from "../pages/Dashboard/Bookings/Bookings";
+import RiderHome from "../pages/Dashboard/RiderHome/RiderHome";
+import RiderUpdates from "../pages/Dashboard/RiderUpdates/RiderUpdates";
+import UserBookTable from "../pages/Dashboard/UserBookTable/UserBookTable";
+import UserBooking from "../pages/Dashboard/UserBooking/UserBooking";
+import TrackFood from "../pages/Dashboard/TrackFood/TrackFood";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +86,26 @@ export const router = createBrowserRouter([
         path: "paymentHistory",
         element: <PaymentHistory></PaymentHistory>,
       },
+      {
+        path: "riderHome",
+        element: <RiderHome></RiderHome>,
+      },
+      {
+        path: "riderUpdates",
+        element: <RiderUpdates></RiderUpdates>,
+      },
+      {
+        path: "userBookTable",
+        element: <UserBookTable></UserBookTable>,
+      },
+      {
+        path: "userBooking",
+        element: <UserBooking></UserBooking>,
+      },
+      {
+        path: "tracker",
+        element: <TrackFood></TrackFood>,
+      },
 
       // admin only routes
       {
@@ -121,6 +147,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "bookings",
+        element: (
+          <AdminRoute>
+            <Bookings></Bookings>
           </AdminRoute>
         ),
       },

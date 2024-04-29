@@ -11,7 +11,6 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
- 
 
 export const AuthContext = createContext(null);
 
@@ -53,6 +52,8 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      // console.log(user);
+
       if (currentUser) {
         // get token and store client
         const userInfo = { email: currentUser.email };
@@ -72,6 +73,8 @@ const AuthProvider = ({ children }) => {
       return unsubscribe();
     };
   }, [axiosPublic]);
+
+  // console.log(user);
 
   const authInfo = {
     user,

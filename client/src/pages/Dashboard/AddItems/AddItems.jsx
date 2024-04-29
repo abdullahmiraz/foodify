@@ -11,7 +11,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddItems = () => {
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
-    const axiosSecure = useAxiosSecure();
+    const [axiosSecure] = useAxiosSecure();
     const onSubmit = async (data) => {
         console.log(data)
         // image upload to imgbb and then get an url

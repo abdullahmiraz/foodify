@@ -5,7 +5,6 @@ import useAuth from "../../../hooks/useAuth";
 import useAdmin from "../../../hooks/useAdmin";
 import useCart from "../../../hooks/useCart";
 import { AuthContext } from "../../../providers/AuthProvider";
- 
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -87,9 +86,10 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
-          <Link to={"/order/salad"} className="btn  btn-outline">
-            Order
-          </Link>
+          <div className="flex gap-4 items-center">
+            <img className="h-5 rounded-full" src={user?.photoURL} alt="" />
+            <NavLink>{user?.displayName}</NavLink>
+          </div>
         </div>
       </div>
     </div>
