@@ -155,7 +155,7 @@ const Dashboard = () => {
                   <FaList></FaList>
                   Track Your Food
                 </NavLink>
-              </li>
+              </li> 
             </>
           )}
           {/* shared nav links */}

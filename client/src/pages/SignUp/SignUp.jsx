@@ -96,6 +96,20 @@ const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
+                  <span className="label-text">Enter Your Location</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("photoURL", { required: true })}
+                  placeholder="Enter location/address"
+                  className="input input-bordered"
+                />
+                {errors.photoURL && (
+                  <span className="text-red-600">Photo URL is required</span>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input

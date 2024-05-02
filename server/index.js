@@ -39,6 +39,7 @@ async function run() {
     const reviewCollection = client.db("bistroDb").collection("reviews");
     const cartCollection = client.db("bistroDb").collection("carts");
     const paymentCollection = client.db("bistroDb").collection("payments");
+    const bookingCollection = client.db("bistroDb").collection("bookings");
 
     // jwt related api
     app.post("/jwt", async (req, res) => {
@@ -72,6 +73,17 @@ async function run() {
       const user = await userCollection.findOne(query);
       const isAdmin = user?.role === "admin";
       if (!isAdmin) {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+      next();
+    };
+
+    const VerifyRider = async (req, res, next) => {
+      const email = req.decoded.email;
+      const query = { email: email };
+      const user = await userCollection.findOne(query);
+      const isRider = user.role === "rider";
+      if (!isRider) {
         return res.status(403).send({ message: "forbidden access" });
       }
       next();
@@ -204,6 +216,14 @@ async function run() {
       const query = { _id: new ObjectId(id) };
       const result = await cartCollection.deleteOne(query);
       res.send(result);
+    });
+
+    // POST route for handling form submission
+    app.post("/book-table", (req, res) => {
+      const formData = req.body;
+      console.log("Received form data:", formData);
+
+      res.status(200).json({ message: "Form submitted successfully" });
     });
 
     // payment intent
