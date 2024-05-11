@@ -40,8 +40,8 @@ const TrackFood = () => {
   };
 
   const destinationLocation2 = {
-    latitude: localLocation.latitude || 23.8883,
-    longitude: localLocation.longitude || 90.3907,
+    latitude: localLocation?.latitude || 23.8883,
+    longitude: localLocation?.longitude || 90.3907,
   };
 
   // Function to calculate the distance between two coordinates using Haversine formula
@@ -63,7 +63,7 @@ const TrackFood = () => {
   // Calculate the distance between the two destinations
   const distance = calculateDistance(
     destinationLocation1.latitude,
-    destinationLocation2.longitude,
+    destinationLocation1.longitude,
     destinationLocation2.latitude,
     destinationLocation2.longitude
   );
