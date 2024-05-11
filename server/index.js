@@ -133,7 +133,7 @@ async function run() {
         const filter = { _id: new ObjectId(id) };
         const updatedDoc = {
           $set: {
-            role: "admin",
+            role: "rider",
           },
         };
         const result = await userCollection.updateOne(filter, updatedDoc);
@@ -218,12 +218,19 @@ async function run() {
       res.send(result);
     });
 
-    // POST route for handling form submission
-    app.post("/book-table", (req, res) => {
-      const formData = req.body;
-      console.log("Received form data:", formData);
+    app.get("/bookings", async (req, res) => {
+      const email = req.query.email;
+      const query = { email: email };
+      const result = await bookingCollection.find(query).toArray();
+      res.send(result);
+    });
 
-      res.status(200).json({ message: "Form submitted successfully" });
+    // POST route for handling form submission
+    app.post("/bookings", async (req, res) => {
+      const formData = req.body;
+      formData.userId = req.userId; // Assuming you have a middleware to extract userId from request
+      const result = await bookingCollection.insertOne(formData);
+      res.send(result);
     });
 
     // payment intent
@@ -241,6 +248,17 @@ async function run() {
       res.send({
         clientSecret: paymentIntent.client_secret,
       });
+    });
+
+    app.get("/payments", async (req, res) => {
+      try {
+        const result = await paymentCollection.find({}).toArray();
+        console.log(result);
+        res.send(result);
+      } catch (error) {
+        console.error("Error:", error);
+        res.status(500).send({ message: "Internal Server Error" });
+      }
     });
 
     app.get("/payments/:email", verifyToken, async (req, res) => {
