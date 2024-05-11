@@ -7,6 +7,8 @@ const Gps = () => {
   const { location, setLocation, setGeo, localLocation, setLocalLocation } =
     useAppContext();
   const [locationInput, setLocationInput] = useState("Mirpur 10"); // State to hold input location
+  console.log(locationInput);
+
   const [error, setError] = useState(null);
   const [responseMessage, setResponseMessage] = useState("");
 
@@ -35,26 +37,28 @@ const Gps = () => {
   useEffect(() => {
     getLocation;
   }, [localLocation]);
+  console.log(localLocation);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const myLocationSearch = await fetch(
         `https://api.geoapify.com/v1/geocode/autocomplete?text=${locationInput}&apiKey=00dc7b385a9948d4b74ab1262d21c2bc`
       );
       const apiLocation = myLocationSearch?.url;
-      // setLocalLocation({
-      //   latitude: response?.features?.geometry?.coordinates[1],
-      //   longitude: response?.features?.geometry?.coordinates[0],
-      // });
-
       console.log(apiLocation);
       const mynewLocation = await fetch(apiLocation)
-      console.log(mynewLocation);
-      
-
-      // Push the location input to another component using React Router
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setLocalLocation({
+            latitude: data?.features[0]?.geometry?.coordinates[1],
+            longitude: data?.features[0]?.geometry?.coordinates[0],
+          });
+        });
     } catch (error) {
+      // Push the location input to another component using React Router
       console.error("Error:", error);
     }
   };
@@ -81,7 +85,7 @@ const Gps = () => {
           value={locationInput}
           onChange={(e) => setLocationInput(e.target.value)}
         />
-        <button type="submit" className="border p-1 rounded">
+        <button type="submit" className="btn btn-primary border p-1 rounded">
           Submit
         </button>
       </form>

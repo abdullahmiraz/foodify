@@ -1,0 +1,6 @@
+
+
+#fix ---------------------------------------------
+1. rider cannot see the website except dashboard
+2. change map location to user order location
+3. user

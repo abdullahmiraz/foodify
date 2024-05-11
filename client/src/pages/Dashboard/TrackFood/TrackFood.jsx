@@ -29,6 +29,8 @@ const iconDesign2 = {
 const TrackFood = () => {
   const { location, setLocation, setGeo, localLocation, setLocalLocation } =
     useAppContext();
+  console.log(localLocation);
+  
   const mapRef = useRef(null);
 
   let destinationLocation1 = {

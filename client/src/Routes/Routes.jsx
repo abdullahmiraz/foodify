@@ -24,6 +24,7 @@ import RiderUpdates from "../pages/Dashboard/RiderUpdates/RiderUpdates";
 import UserBookTable from "../pages/Dashboard/UserBookTable/UserBookTable";
 import UserBooking from "../pages/Dashboard/UserBooking/UserBooking";
 import TrackFood from "../pages/Dashboard/TrackFood/TrackFood";
+import UserReview from "../pages/Dashboard/UserReview/UserReview";
 
 export const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
       {
         path: "tracker",
         element: <TrackFood></TrackFood>,
+      },
+      {
+        path: "review",
+        element: <UserReview />,
       },
 
       // admin only routes

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { FaBiking, FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
@@ -21,7 +21,7 @@ const AllUsers = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${user.name} is an Admin Now!`,
+          title: `${user.name} is a rider Now!`,
           showConfirmButton: false,
           timer: 1500,
         });
@@ -88,10 +88,10 @@ const AllUsers = () => {
                       onClick={() => handleMakeAdmin(user)}
                       className="btn btn-lg bg-orange-500"
                     >
-                      <FaUsers
+                      <FaBiking
                         className="text-white 
                                         text-2xl"
-                      ></FaUsers>
+                      ></FaBiking>
                     </button>
                   )}
                 </td>
