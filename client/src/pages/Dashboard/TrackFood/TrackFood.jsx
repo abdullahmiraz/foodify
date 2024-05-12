@@ -30,7 +30,7 @@ const TrackFood = () => {
   const { location, setLocation, setGeo, localLocation, setLocalLocation } =
     useAppContext();
   console.log(localLocation);
-  
+
   const mapRef = useRef(null);
 
   let destinationLocation1 = {
@@ -101,66 +101,77 @@ const TrackFood = () => {
 
   return (
     <div>
-      <Gps />
-      <br />
-      <br />
-      <div className="work-section-top">
-        <p className="primary-subheading">Track Food Nearby</p>
+      <div
+        tabIndex={0}
+        className="collapse collapse-arrow border border-base-300 bg-base-200"
+      >
+        <input type="checkbox" />
+        <div className="collapse-title text-xl font-medium">
+          Your Current Location & Address
+        </div>
+        <div className="collapse-content">
+          <Gps />
+        </div>
       </div>
-      <center>
-        <br />
-        <MapContainer
-          center={[
-            (destinationLocation1.latitude + destinationLocation2.latitude) / 2,
-            (destinationLocation1.longitude + destinationLocation2.longitude) /
-              2,
-          ]}
-          zoom={10}
-          style={{ height: "400px", width: "80%" }}
-          ref={mapRef}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-
-          {/* Render the Polyline for the straight line */}
-          <Polyline positions={lineCoordinates} color="green" />
-
-          {/* Render the Marker for destinationLocation1 */}
-          <Marker
-            position={[
-              destinationLocation1.latitude,
-              destinationLocation1.longitude,
-            ]}
-            icon={L.icon(iconDesign)}
-          >
-            <Popup>Destination 1</Popup>
-          </Marker>
-
-          {/* Render the Marker for destinationLocation2 */}
-          <Marker
-            position={[
-              destinationLocation2.latitude,
-              destinationLocation2.longitude,
-            ]}
-            icon={L.icon(iconDesign2)}
-          >
-            <Popup>Destination 2</Popup>
-          </Marker>
-          <Circle
+      <div className="border p-2 my-4 bg-slate-200 rounded-md">
+        <center>
+          <br />
+          <MapContainer
             center={[
-              destinationLocation2.latitude,
-              destinationLocation2.longitude,
+              (destinationLocation1?.latitude +
+                destinationLocation2?.latitude) /
+                2,
+              (destinationLocation1?.longitude +
+                destinationLocation2?.longitude) /
+                2,
             ]}
-            radius={500} // Set radius in meters
-            pathOptions={{ color: "blue" }}
-          />
-        </MapContainer>
-      </center>
-      <div>
-        <p>Distance between destinations: {distance} km</p>
-        <p>Time to travel between destinations: {timeInMinutes} minutes</p>
+            zoom={10}
+            style={{ height: "400px", width: "80%" }}
+            ref={mapRef}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+
+            {/* Render the Polyline for the straight line */}
+            <Polyline positions={lineCoordinates} color="green" />
+
+            {/* Render the Marker for destinationLocation1 */}
+            <Marker
+              position={[
+                destinationLocation1?.latitude,
+                destinationLocation1?.longitude,
+              ]}
+              icon={L.icon(iconDesign)}
+            >
+              <Popup>Destination 1</Popup>
+            </Marker>
+
+            {/* Render the Marker for destinationLocation2 */}
+            <Marker
+              position={[
+                destinationLocation2?.latitude,
+                destinationLocation2?.longitude,
+              ]}
+              icon={L.icon(iconDesign2)}
+            >
+              <Popup>Destination 2</Popup>
+            </Marker>
+            <Circle
+              center={[
+                destinationLocation2?.latitude,
+                destinationLocation2?.longitude,
+              ]}
+              radius={500} // Set radius in meters
+              pathOptions={{ color: "blue" }}
+            />
+          </MapContainer>
+        </center>
+        <div className="m-4">
+          <p>Distance between destinations: {distance} km</p>
+          <p>Time to travel between destinations: {timeInMinutes} minutes</p>
+        </div>
       </div>
     </div>
   );
