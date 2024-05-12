@@ -5,9 +5,13 @@ import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useRider from "../../../hooks/useRider";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Gps = () => {
   const { user } = useAuth();
+  const [isRider] = useRider();
+  const [isAdmin] = useAdmin();
 
   const [axiosSecure] = useAxiosSecure();
   const { location, setLocation, setGeo, localLocation, setLocalLocation } =
@@ -73,6 +77,7 @@ const Gps = () => {
             },
             date: new Date(),
             status: "pending",
+            assignedto: "",
           };
 
           axiosSecure
@@ -111,11 +116,11 @@ const Gps = () => {
         <div className="mt-4">
           <span className="font-bold">Latitude: </span>
           {localLocation.latitude ||
-            "Share Live location to get current Lattitude"}
+            "Share Live location to get current Lattitude and submit"}
           <br />
           <span className="font-bold"> Longitude: </span>
           {localLocation.longitude ||
-            "Share Live location to get current Longitude"}
+            "Share Live location to get current Longitude and submit"}
         </div>
       )}
       <br />

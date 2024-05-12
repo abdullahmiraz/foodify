@@ -84,6 +84,12 @@ const Dashboard = () => {
                   Payment History
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/dashboard/riderUpdates">
+                  <FaHome></FaHome>
+                  Available Orders/Rider Updates
+                </NavLink>
+              </li>
             </>
           ) : isRider ? (
             <div className="flex flex-col gap-3">
@@ -96,13 +102,13 @@ const Dashboard = () => {
               <li>
                 <NavLink to="/dashboard/riderUpdates">
                   <FaHome></FaHome>
-                  Rider Updates
+                  Available Orders/Rider Updates
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/tracker">
                   <FaList></FaList>
-                  Track Your Food
+                  Your Current Order
                 </NavLink>
               </li>
             </div>
@@ -155,7 +161,7 @@ const Dashboard = () => {
                   <FaList></FaList>
                   Track Your Food
                 </NavLink>
-              </li> 
+              </li>
             </>
           )}
           {/* shared nav links */}
