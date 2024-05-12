@@ -40,6 +40,7 @@ async function run() {
     const cartCollection = client.db("bistroDb").collection("carts");
     const paymentCollection = client.db("bistroDb").collection("payments");
     const bookingCollection = client.db("bistroDb").collection("bookings");
+    const userLocation = client.db("bistroDb").collection("userlocation");
 
     // jwt related api
     app.post("/jwt", async (req, res) => {
@@ -88,6 +89,72 @@ async function run() {
       }
       next();
     };
+    // rider verification
+    // users related api
+    app.get("/users/rider/:email", verifyToken, async (req, res) => {
+      const email = req.params.email;
+
+      if (email !== req.decoded.email) {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+
+      const query = { email: email };
+      const user = await userCollection.findOne(query);
+      let rider = false;
+      if (user) {
+        rider = user?.role === "rider";
+      }
+      res.send({ rider });
+    });
+
+    // Update user location status
+    // Update user location status
+    app.put("/userlocations/:id", async (req, res) => {
+      const orderId = req.params.id;
+      const newStatus = req.body.status;
+      const currentUserEmail = req.body.assignedto; // Make sure to extract the assignedto field from the request body
+
+      try {
+        const result = await userLocation.updateOne(
+          { _id: new ObjectId(orderId) },
+          { $set: { status: newStatus, assignedto: currentUserEmail } }
+        );
+
+        if (result.modifiedCount === 1) {
+          res.status(200).send({
+            message: "User location status updated successfully",
+            result,
+          });
+        } else {
+          res.status(404).send({ message: "User location not found" });
+        }
+      } catch (error) {
+        console.error("Error updating user location status:", error);
+        res.status(500).send({ message: "Internal server error" });
+      }
+    });
+    // Add a new route handler for deleting user locations
+    app.delete("/userlocations/:id", async (req, res) => {
+      const orderId = req.params.id;
+
+      try {
+        // Delete the user location with the given ID
+        const result = await userLocation.deleteOne({
+          _id: new ObjectId(orderId),
+        });
+
+        if (result.deletedCount === 1) {
+          res
+            .status(200)
+            .send({ message: "User location deleted successfully" });
+        } else {
+          res.status(404).send({ message: "User location not found" });
+        }
+      } catch (error) {
+        console.error("Error deleting user location:", error);
+        res.status(500).send({ message: "Internal server error" });
+      }
+    });
 
     // users related api
     app.get("/users", verifyToken, verifyAdmin, async (req, res) => {
@@ -230,6 +297,51 @@ async function run() {
       const formData = req.body;
       formData.userId = req.userId; // Assuming you have a middleware to extract userId from request
       const result = await bookingCollection.insertOne(formData);
+      res.send(result);
+    });
+
+    // GET user locations
+    app.get("/userlocations", async (req, res) => {
+      try {
+        const userLocations = await userLocation.find().toArray();
+        console.log(userLocations);
+        res.send(userLocations);
+      } catch (error) {
+        console.error("Error fetching user locations:", error);
+        res.status(500).send("Internal server error");
+      }
+    });
+
+    // Update user location status
+    app.put("/userlocations/:id", async (req, res) => {
+      const orderId = req.params.id;
+      const newStatus = req.body.status;
+
+      try {
+        // Update the status of the order with the given ID
+        const result = await userLocation.updateOne(
+          { _id: new ObjectId(orderId) },
+          { $set: { status: newStatus } }
+        );
+
+        if (result.modifiedCount === 1) {
+          res
+            .status(200)
+            .send({ message: "Order status updated successfully" });
+        } else {
+          res.status(404).send({ message: "Order not found" });
+        }
+      } catch (error) {
+        console.error("Error updating order status:", error);
+        res.status(500).send({ message: "Internal server error" });
+      }
+    });
+
+    // saving user's location
+    app.post("/userlocation", async (req, res) => {
+      const formData = req.body;
+      console.log(formData);
+      const result = await userLocation.insertOne(formData);
       res.send(result);
     });
 
