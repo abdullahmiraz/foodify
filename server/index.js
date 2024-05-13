@@ -110,7 +110,7 @@ async function run() {
     // Update user location status
     // Update user location status
     app.put("/userlocations/:id", async (req, res) => {
-      const orderId = req.params.id;
+      const orderId = req.params.id; 
       const newStatus = req.body.status;
       const currentUserEmail = req.body.assignedto; // Make sure to extract the assignedto field from the request body
 
