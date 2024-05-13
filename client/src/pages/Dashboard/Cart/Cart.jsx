@@ -3,11 +3,26 @@ import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-  const [axiosSecure] = useAxiosSecure();
+  const [totalPrice, setTotalPrice] = useState(0); // State to track total price
+  const [quantities, setQuantities] = useState({}); // State to track quantities
+
+  // Function to handle changes in quantity input
+  const handleQuantityChange = (id, quantity) => {
+    setQuantities({ ...quantities, [id]: quantity });
+  };
+
+  useEffect(() => {
+    // Calculate total price based on quantities entered
+    const newTotalPrice = cart.reduce(
+      (total, item) => total + (quantities[item._id] || 0) * item.price,
+      0
+    );
+    setTotalPrice(newTotalPrice);
+  }, [cart, quantities]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -61,6 +76,7 @@ const Cart = () => {
               <th>Name</th>
               <th>Price</th>
               <th>Action</th>
+              <th>quantity</th>
             </tr>
           </thead>
           <tbody>
@@ -81,14 +97,29 @@ const Cart = () => {
                 </td>
                 <td>{item.name}</td>
                 <td>${item.price}</td>
-                <th>
+                <td>
                   <button
                     onClick={() => handleDelete(item._id)}
                     className="btn btn-ghost btn-lg"
                   >
                     <FaTrashAlt className="text-red-600"></FaTrashAlt>
                   </button>
-                </th>
+                </td>
+                <td>
+                  <input
+                    className="border w-16 text-center"
+                    type="number"
+                    value={quantities[item._id] || 1}
+                    min={1}
+                    max={20}
+                    onChange={(e) => {
+                      const newValue = parseInt(e.target.value);
+                      if (!isNaN(newValue) && newValue >= 1 && newValue <= 20) {
+                        handleQuantityChange(item._id, newValue);
+                      }
+                    }}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
