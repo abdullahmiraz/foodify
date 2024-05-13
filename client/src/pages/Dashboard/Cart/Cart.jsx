@@ -3,26 +3,18 @@ import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Cart = () => {
-  const [cart, refetch] = useCart();
-  const [totalPrice, setTotalPrice] = useState(0); // State to track total price
   const [quantities, setQuantities] = useState({}); // State to track quantities
+  const [cart, refetch] = useCart();
+  const totalPrice = cart.reduce((total, item) => {
+    const itemQuantity = quantities[item._id] || 1; // Default quantity is 1 if not specified
+    return total + item.price * itemQuantity;
+  }, 0);
 
-  // Function to handle changes in quantity input
-  const handleQuantityChange = (id, quantity) => {
-    setQuantities({ ...quantities, [id]: quantity });
-  };
-
-  useEffect(() => {
-    // Calculate total price based on quantities entered
-    const newTotalPrice = cart.reduce(
-      (total, item) => total + (quantities[item._id] || 0) * item.price,
-      0
-    );
-    setTotalPrice(newTotalPrice);
-  }, [cart, quantities]);
+  const [axiosSecure] = useAxiosSecure();
+  console.log(totalPrice);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -49,6 +41,10 @@ const Cart = () => {
     });
   };
 
+  const handleQuantityChange = (id, quantity) => {
+    setQuantities({ ...quantities, [id]: quantity });
+  };
+
   return (
     <div>
       <div className="flex justify-evenly mb-8">
@@ -67,9 +63,9 @@ const Cart = () => {
         )}
       </div>
       <div className="overflow-x-auto">
-        <table className="table  w-full">
+        <table className="table table-bordered w-full">
           {/* head */}
-          <thead>
+          <thead className="border-b-2">
             <tr>
               <th>#</th>
               <th>Image</th>
@@ -107,7 +103,7 @@ const Cart = () => {
                 </td>
                 <td>
                   <input
-                    className="border w-16 text-center"
+                    className="border w-16 text-center bg-blue-200 p-2"
                     type="number"
                     value={quantities[item._id] || 1}
                     min={1}
