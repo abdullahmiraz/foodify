@@ -106,10 +106,10 @@ const RiderUpdates = () => {
           </thead>
           <tbody>
             {userLocations.map((location) => (
-              <tr key={location._id}>
+              <tr key={location?._id}>
                 <td>{location.email}</td>
-                <td>{location.address?.latitude}</td>
-                <td>{location.address?.longitude}</td>
+                <td>{location?.address?.latitude}</td>
+                <td>{location?.address?.longitude}</td>
                 <td>{new Date(location.date)?.toLocaleString()}</td>
                 <td>{location.status}</td>
 
